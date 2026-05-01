@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+  n8n:
+    image: n8n
+    restart: always
+    ports:
+      - '5678:5678'
+    environment:
+      - N8N_HOST=n8n.example.com
+      - N8N_PORT=5678
+      - NODE_ENV=production
+      - DB_TYPE=postgres
+      - DB_POSTGRESDB=your_postgres_db
+      - DB_POSTGRES_HOST=your_postgres_host
+      - DB_POSTGRES_PORT=5432
+      - DB_POSTGRES_USER=your_user
+      - DB_POSTGRES_PASSWORD=your_password
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=your_user
+      - N8N_BASIC_AUTH_PASSWORD=your_password
+    volumes:
+      - n8n_data:/home/n8n/.n8n
+    networks:
+      - n8n_network
+
+volumes:
+  n8n_data:
+
+networks:
+  n8n_network:
